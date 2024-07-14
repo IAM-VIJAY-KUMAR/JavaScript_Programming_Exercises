@@ -1,14 +1,87 @@
-// Level 1
+function createClosureExample1() {
+  let outerVar = "I am outer";
 
-// Create a closure which has one inner function
+  function innerFunction() {
+    console.log(`Inner function accessing outer variable: ${outerVar}`);
+  }
 
-// Level 2
+  return innerFunction;
+}
 
-// Create a closure which has three inner functions
+const innerFunc = createClosureExample1();
+innerFunc();
 
-// Level 3
+function createClosureExample2() {
+  let count = 0;
 
-// Create a personAccount out function. It has firstname, lastname, incomes, expenses inner 
-// variables. It has totalIncome, totalExpense, accountInfo,addIncome, addExpense and 
-// accountBalance inner functions. Incomes is a set of incomes and its description and 
-// expenses is also a set of expenses and its description.
+  function increment() {
+    count++;
+    console.log(`Count incremented: ${count}`);
+  }
+
+  function decrement() {
+    count--;
+    console.log(`Count decremented: ${count}`);
+  }
+
+  function getCount() {
+    console.log(`Current count: ${count}`);
+  }
+
+  return { increment, decrement, getCount };
+}
+
+const counter = createClosureExample2();
+counter.increment();
+counter.increment();
+counter.decrement();
+counter.getCount();
+
+function createPersonAccount(firstName, lastName) {
+  let incomes = [];
+  let expenses = [];
+
+  function addIncome(description, amount) {
+    incomes.push({ description, amount });
+  }
+
+  function addExpense(description, amount) {
+    expenses.push({ description, amount });
+  }
+
+  function totalIncome() {
+    let total = 0;
+    incomes.forEach((item) => {
+      total += item.amount;
+    });
+    return total;
+  }
+
+  function totalExpense() {
+    let total = 0;
+    expenses.forEach((item) => {
+      total += item.amount;
+    });
+    return total;
+  }
+
+  function accountInfo() {
+    return `${firstName} ${lastName}'s account:\nTotal Income: ${totalIncome()}\nTotal Expense: ${totalExpense()}`;
+  }
+
+  function accountBalance() {
+    return totalIncome() - totalExpense();
+  }
+
+  return { addIncome, addExpense, accountInfo, accountBalance };
+}
+
+const anandKumarAccount = createPersonAccount("Anand", "Kumar");
+anandKumarAccount.addIncome("Salary", 3000);
+anandKumarAccount.addIncome("Petrol", 1000);
+anandKumarAccount.addExpense("Rent", 1200);
+anandKumarAccount.addExpense("Food", 300);
+
+console.log(anandKumarAccount.accountInfo());
+
+console.log(`Current Balance: ${anandKumarAccount.accountBalance()}`);

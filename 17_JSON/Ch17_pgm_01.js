@@ -1,13 +1,25 @@
-const skills = ['HTML', 'CSS', 'JS', 'React','Node', 'Python']
+const skills = ["HTML", "CSS", "JS", "React", "Node", "Python"];
 let age = 250;
-let isMarried = true
+let isMarried = true;
 const student = {
-  firstName:'Asabeneh',
-  lastName:'Yetayehe',
-  age:250,
-  isMarried:true,
-  skills:['HTML', 'CSS', 'JS', 'React','Node', 'Python', ]
-}
+  firstName: "Asabeneh",
+  lastName: "Yetayehe",
+  age: 250,
+  isMarried: true,
+  skills: ["HTML", "CSS", "JS", "React", "Node", "Python"],
+};
+const skillsJSON = JSON.stringify(skills);
+console.log(skillsJSON);
+
+const ageJSON = JSON.stringify(age);
+console.log(ageJSON);
+
+const isMarriedJSON = JSON.stringify(isMarried);
+console.log(isMarriedJSON);
+
+const studentJSON = JSON.stringify(student);
+console.log(studentJSON);
+
 const txt = `{
     "Alex": {
         "email": "alex@alex.com",
@@ -61,20 +73,6 @@ const txt = `{
         "isLoggedIn": false,
         "points": 40
     },
-    "John": {
-        "email": "john@john.com",
-        "skills": [
-            "HTML",
-            "CSS",
-            "JavaScript",
-            "React",
-            "Redux",
-            "Node.js"
-        ],
-        "age": 20,
-        "isLoggedIn": true,
-        "points": 50
-    },
     "Thomas": {
         "email": "thomas@thomas.com",
         "skills": [
@@ -102,20 +100,21 @@ const txt = `{
         "isLoggedIn": false,
         "points": 40
     }
+}`;
+
+const users = JSON.parse(txt);
+
+let maxSkills = 0;
+let userWithMaxSkills = null;
+
+for (const user in users) {
+  if (users.hasOwnProperty(user)) {
+    const skillsCount = users[user].skills.length;
+    if (skillsCount > maxSkills) {
+      maxSkills = skillsCount;
+      userWithMaxSkills = user;
+    }
+  }
 }
-`
 
-
-// Level 1
-
-// 1. Change skills array to JSON using JSON.stringify()
-// 2. Stringify the age variable
-// 3. Stringify the isMarried variable
-// 4. Stringify the student object
-
-// Level 2
-// 1. Stringify the students object with only firstName, lastName and skills properties
-
-// Level 3
-// 1. Parse the txt JSON to object.
-// 2. Find the user who has many skills from the variable stored in txt.
+console.log(`User with the most skills is: ${userWithMaxSkills}`);
