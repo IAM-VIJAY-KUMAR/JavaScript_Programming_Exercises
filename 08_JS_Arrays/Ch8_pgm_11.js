@@ -1,37 +1,21 @@
-// Finding the total shopping bill
+var getTotalBill = function (items) {
+  var total = 0;
 
-var getTotalBill = function (itemCosts, itemCounts) {
-	var total = 0;
+  items.forEach(function (item) {
+    total += item.cost * item.numberBought;
+  });
 
-	itemCosts.forEach(function (cost, i) {
-		total += cost * itemCounts[i];
-	});
-
-	return total;
+  return total;
 };
 
-var costs = [ 1.99, 4.95, 2.50, 9.87 ];
-var numOfEach = [ 2, 1, 5, 2 ];
+var items = [
+  { cost: 1.99, numberBought: 2 },
+  { cost: 4.95, numberBought: 1 },
+  { cost: 2.5, numberBought: 5 },
+  { cost: 9.87, numberBought: 2 },
+  // Add an extra item to the shopping trip
+  { cost: 3.75, numberBought: 4 },
+];
 
-console.log("The total cost is $" + getTotalBill(costs, numOfEach));
-
-
-
-/* Further Adventures
- *
- * 1) Add an extra item to the shopping trip.
- *
- * 2) Change the function so that forEach iterates
- *    over itemCounts instead of itemCosts.
- *    Can you make it work?
- *
- * 3) Create a single array of objects with
- *    cost and numberBought properties.
- *
- *    items = [ { cost: 1.99, numberBought: 2 },
- *              { cost: 4.95, numberBought: 1 } ];
- *
- * 4) Update getTotalBill to accept a single array
- *    of items.
- *
- */
+// Calculate and log the total cost
+console.log("The total cost is $" + getTotalBill(items));
